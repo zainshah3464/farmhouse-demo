@@ -55,6 +55,7 @@ A premium, fully responsive farmhouse listing website with a modern dark theme, 
 ---
 
 ## 📁 Project Structure
+```
 farmhouse-demo/
 ├── public/
 ├── src/
@@ -86,9 +87,7 @@ farmhouse-demo/
 ├── tailwind.config.js
 ├── package.json
 └── README.md
-
-text
-
+```
 ---
 
 ## 🔧 Setup & Installation
@@ -98,41 +97,41 @@ text
 git clone https://github.com/zainshah3464/farmhouse-demo.git
 cd farmhouse-demo
 Install dependencies
-
-bash
-npm install
-Run development server
-
-bash
+```
+### npm install
+**Run development server**
+```
 npm run dev
 Open http://localhost:3000
-
-Build for production
-
-bash
+```
+**Build for production**
+```bash
 npm run build
 npm start
-🗄️ Supabase Setup (Optional – currently using dummy data)
+```
+**🗄️ Supabase Setup** *(Optional – currently using dummy data)*
 If you want dynamic data with a real backend, follow these steps:
 
-1. Create a Supabase project
+### 1. Create a Supabase project
 Go to supabase.com, sign up, create a new project.
 
-Note your API URL and anon key.
+*Note your API URL and anon key.*
 
-2. Environment Variables
+### 2. Environment Variables
 Create a .env.local file in the root:
-
-text
+```
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-3. Install Supabase client
-bash
+```
+### 3. Install Supabase client
+```bash
 npm install @supabase/supabase-js
-4. Database Schema
-Create a farmhouses table in the Supabase SQL editor:
+```
+### 4. Database Schema
+**Create a farmhouses** *table in the Supabase SQL editor:*
 
-sql
+**sql**
+```
 CREATE TABLE farmhouses (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   slug TEXT UNIQUE NOT NULL,
@@ -147,33 +146,30 @@ CREATE TABLE farmhouses (
   map_embed_url TEXT,
   created_at TIMESTAMP DEFAULT now()
 );
-5. Storage (for images)
-Create a bucket farmhouse-images and make it public.
+```
+### 5. Storage (for images)
 
-Update the admin form to upload files instead of pasting URLs (requires additional code).
+- Create a bucket farmhouse-images and make it public.
+- Update the admin form to upload files instead of pasting URLs (*requires additional code*).
 
-6. Row Level Security (RLS)
-Enable RLS on farmhouses.
+### 6. Row Level Security (*RLS*)
 
-Allow public read for all rows.
+- Enable RLS on farmhouses.
+- Allow public read for all rows.
+- Allow authenticated users (admin) to insert, update, delete.
 
-Allow authenticated users (admin) to insert, update, delete.
+### 7. Admin Authentication
 
-7. Admin Authentication
-Use Supabase Auth with email/password.
+- Use Supabase Auth with email/password.
+- Create an admin user via Supabase dashboard or registration page.
+- Update the admin panel to use Supabase auth instead of hardcoded password.
 
-Create an admin user via Supabase dashboard or registration page.
+### 📊 Google Analytics Setup
 
-Update the admin panel to use Supabase auth instead of hardcoded password.
-
-📊 Google Analytics Setup
-Go to analytics.google.com and create a property.
-
-Get your Measurement ID (starts with G-).
-
-Open src/app/layout.tsx and add the GA script inside the <head>:
-
-tsx
+- Go to analytics.google.com and create a property.
+- Get your Measurement ID (starts with G-).
+- Open src/app/layout.tsx and add the GA script inside the <head>:
+```
 <script async src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`} />
 <script dangerouslySetInnerHTML={{
   __html: `
@@ -183,98 +179,75 @@ tsx
     gtag('config', 'G-XXXXXXXXXX');
   `
 }} />
-Replace G-XXXXXXXXXX with your actual ID.
+```
+*Note : Replace G-XXXXXXXXXX with your actual ID.*
 
-Track custom events (WhatsApp clicks, page views) as needed.
+**Track custom events (WhatsApp clicks, page views) as needed.**
 
-🚀 Deploy to Vercel
-Push your code to GitHub.
+### 🚀 Deploy to Vercel
 
-Import the repository on Vercel.
+- Push your code to GitHub.
+- Import the repository on Vercel.
+- Add environment variables (if using Supabase).
+- Deploy. Vercel will auto‑detect Next.js.
+- Your site will be live on your-project.vercel.app.
+- Alternative (without GitHub):
 
-Add environment variables (if using Supabase).
-
-Deploy. Vercel will auto‑detect Next.js.
-
-Your site will be live on your-project.vercel.app.
-
-Alternative (without GitHub):
-
-bash
+```bash
 npm i -g vercel
-vercel
-⚠️ Supabase Free Tier Limitations
-500 MB database – enough for 25 farmhouses.
+```
+### vercel
+**⚠️ Supabase Free Tier Limitations**
+**500 MB database – enough for 25 farmhouses.**
+- 1 GB file storage – images must be optimized (WebP, max 200 KB each). For 25 farmhouses × 10 images, it's safe.
+- 2 GB bandwidth per month for storage. If you expect high traffic, consider a CDN (Cloudflare) or upgrade.
+- 50,000 monthly active users for auth – more than enough for a small business.
+- No built‑in email service – use Supabase edge functions or a third‑party service for contact forms (currently not implemented).
 
-1 GB file storage – images must be optimized (WebP, max 200 KB each). For 25 farmhouses × 10 images, it's safe.
+### 🧑‍💼 Client Details (Customisation)
 
-2 GB bandwidth per month for storage. If you expect high traffic, consider a CDN (Cloudflare) or upgrade.
+- Replace the following in the code:
+- Phone Number: Search 923102787627 and replace with actual client number.
+- Email: Search arshadjamal1709@gmail.com and replace.
+- Address: Update in Footer.tsx.
+- Social Links: Add real Facebook/Instagram URLs in Footer.tsx.
+- 🎨 Styling & Animation
+- Dark Theme: All colors defined in globals.css (gray scale, emerald).
+- Glassmorphism: .glass utility class.
+- Scroll Reveal: ScrollReveal component using Intersection Observer.
+- Continuous Animations: pulse-glow, float, fadeInUp keyframes.
 
-50,000 monthly active users for auth – more than enough for a small business.
+### 🔐 Admin Credentials (*Demo*)
+- URL: /admin
+- Password: demo123
+*⚠️ For production, replace with Supabase Auth or a strong hashed password.*
 
-No built‑in email service – use Supabase edge functions or a third‑party service for contact forms (currently not implemented).
+### 🗺️ Google Maps Embed
 
-🧑‍💼 Client Details (Customisation)
-Replace the following in the code:
+- Each farmhouse in `src/data/farmhouses.ts` contains a `mapEmbedUrl`. Replace the placeholder with a real Google Maps embed link:
+- Go to Google Maps, search the location.
+- Click Share → Embed a map.
+- Copy the src URL and paste it into `mapEmbedUrl`.
+---
+### 📞 WhatsApp Booking Flow
 
-Phone Number: Search 923102787627 and replace with actual client number.
+- User clicks “Chat Now” / “Chat for Best Price”.
+- WhatsApp web/app opens with a pre‑filled message like:
 
-Email: Search arshadjamal1709@gmail.com and replace.
+**Hi, I'm interested in `[Farmhouse Name]` at `[Location]`**
+**The client negotiates price and confirms manually.**
+- No online payment integration – ideal for businesses where bargaining is common.
+---
+### 🛠️ Future Enhancements
+- Real booking calendar with availability
+- Online payment gateway (Razorpay/Stripe)
+- Email notifications for enquiries
+- Multi‑language support
+- Image upload in admin (via Supabase Storage)
+- User accounts for returning customers
 
-Address: Update in Footer.tsx.
-
-Social Links: Add real Facebook/Instagram URLs in Footer.tsx.
-
-🎨 Styling & Animation
-Dark Theme: All colors defined in globals.css (gray scale, emerald).
-
-Glassmorphism: .glass utility class.
-
-Scroll Reveal: ScrollReveal component using Intersection Observer.
-
-Continuous Animations: pulse-glow, float, fadeInUp keyframes.
-
-🔐 Admin Credentials (Demo)
-URL: /admin
-
-Password: demo123
-
-⚠️ For production, replace with Supabase Auth or a strong hashed password.
-
-🗺️ Google Maps Embed
-Each farmhouse in src/data/farmhouses.ts contains a mapEmbedUrl. Replace the placeholder with a real Google Maps embed link:
-
-Go to Google Maps, search the location.
-
-Click Share → Embed a map.
-
-Copy the src URL and paste it into mapEmbedUrl.
-
-📞 WhatsApp Booking Flow
-User clicks “Chat Now” / “Chat for Best Price”.
-
-WhatsApp web/app opens with a pre‑filled message like:
-
-text
-Hi, I'm interested in [Farmhouse Name] at [Location]
-The client negotiates price and confirms manually.
-
-No online payment integration – ideal for businesses where bargaining is common.
-
-🛠️ Future Enhancements
-Real booking calendar with availability
-
-Online payment gateway (Razorpay/Stripe)
-
-Email notifications for enquiries
-
-Multi‑language support
-
-Image upload in admin (via Supabase Storage)
-
-User accounts for returning customers
-
-📦 Dependencies
+### 📦 Dependencies
+```
 json
 {
   "next": "16.2.9",
@@ -284,44 +257,12 @@ json
   "tailwindcss": "4.0.0",
   "@tailwindcss/postcss": "latest"
 }
-🤝 Contributing
-This is a client project. For custom development, contact:
-📧 arshadjamal1709@gmail.com
-📞 0310 2787627
-
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+### 🤝 Contributing
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
+**This is a client project. For custom development, contact:**
+- *📧 arshadjamal1709@gmail.com*
+- *📞 0310 2787627*
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
