@@ -115,7 +115,7 @@ If you want dynamic data with a real backend, follow these steps:
 ### 1. Create a Supabase project
 Go to supabase.com, sign up, create a new project.
 
-*Note your API URL and anon key.*
+*Note : `your API URL and anon key.`*
 
 ### 2. Environment Variables
 Create a .env.local file in the root:
@@ -180,7 +180,7 @@ CREATE TABLE farmhouses (
   `
 }} />
 ```
-*Note : Replace G-XXXXXXXXXX with your actual ID.*
+*Note : `Replace G-XXXXXXXXXX with your actual ID`.*
 
 **Track custom events (WhatsApp clicks, page views) as needed.**
 
@@ -263,6 +263,3 @@ json
 **This is a client project. For custom development, contact:**
 - *📧 arshadjamal1709@gmail.com*
 - *📞 0310 2787627*
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
